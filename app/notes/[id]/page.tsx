@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props) {
     openGraph: {
       title: `Note: ${note.title} | NoteHub`,
       description: note.content?.slice(0, 150) || "",
-      url: `https://08-zustand-puce.vercel.app/notes/${params.id}`,
+      url: `https://your-domain.com/notes/${params.id}`,
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
@@ -29,11 +29,7 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-type NoteDetailsProps = {
-  params: { id: string };
-};
-
-async function NoteDetails({ params }: NoteDetailsProps) {
+async function NoteDetails({ params }: Props) {
   const { id } = params;
   const parseId = Number(id);
   const queryClient = new QueryClient();
