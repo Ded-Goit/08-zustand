@@ -1,3 +1,4 @@
+//app/@modal/(.)notes/[id]/NotePreview.client.tsx
 "use client";
 
 import Modal from "@/components/Modal/Modal";
