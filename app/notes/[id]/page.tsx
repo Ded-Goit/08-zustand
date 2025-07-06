@@ -6,11 +6,7 @@ import {
 import { fetchNoteById } from "@/lib/api";
 import NoteDetailsClient from "@/app/notes/[id]/NoteDetails.client";
 
-type Props = {
-  params: { id: string };
-};
-
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: { params: { id: string } }) {
   const note = await fetchNoteById(Number(params.id));
 
   return {
@@ -19,7 +15,7 @@ export async function generateMetadata({ params }: Props) {
     openGraph: {
       title: `Note: ${note.title} | NoteHub`,
       description: note.content?.slice(0, 150) || "",
-      url: `https://your-domain.com/notes/${params.id}`,
+      url: `https://08-zustand-puce.vercel.app/notes/${params.id}`,
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
@@ -29,9 +25,12 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-async function NoteDetails({ params }: Props) {
-  const { id } = params;
-  const parseId = Number(id);
+export default async function NoteDetails({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const parseId = Number(params.id);
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
@@ -45,5 +44,3 @@ async function NoteDetails({ params }: Props) {
     </HydrationBoundary>
   );
 }
-
-export default NoteDetails;
