@@ -1,3 +1,4 @@
+//lib/api.ts
 import apiClient from "@/lib/apiClient";
 import { Note } from "@/types/note";
 import { NoteTag } from "@/types/note";

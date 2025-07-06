@@ -2,6 +2,22 @@
 import css from "./Home.module.css";
 import Link from "next/link";
 
+export const metadata = {
+  title: "404 — Page Not Found | NoteHub",
+  description:
+    "Unfortunately, this page does not exist. Please return to the NoteHub.",
+  openGraph: {
+    title: "404 — Page Not Found | NoteHub",
+    description:
+      "Unfortunately, this page does not exist. Please return to the NoteHub.",
+    url: "https://08-zustand-puce.vercel.app/404",
+    images: [
+      {
+        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+      },
+    ],
+  },
+};
 const NotFound = () => {
   return (
     <div>

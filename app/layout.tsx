@@ -10,6 +10,16 @@ export const metadata: Metadata = {
   icons: {
     icon: "/notehub.svg",
   },
+  openGraph: {
+    title: "NoteHub",
+    description: "Application for creating and viewing notes",
+    url: "https://08-zustand-puce.vercel.app/",
+    images: [
+      {
+        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
