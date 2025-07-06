@@ -6,32 +6,34 @@ import {
 } from "@tanstack/react-query";
 import NotesClient from "./Notes.client";
 import { Note } from "@/types/note";
+import { Metadata } from "next";
 
-type Props = {
-  params: { slug: string[] };
+type NotesProps = {
+  params: Promise<{ slug: string[] }>;
 };
+export async function generateMetadata({
+  params,
+}: NotesProps): Promise<Metadata> {
+  const { slug } = await params;
 
-export async function generateMetadata({ params }: Props) {
-  const filterName = params.slug.join("/");
   return {
-    title: `Filter: ${filterName} | NoteHub`,
-    description: `View notes filtered by: ${filterName}`,
+    title: slug[0] === "all" ? "All notes" : slug[0],
+    description: `This page contains notes from the category ${slug[0] === "all" ? "All notes" : slug[0]}`,
     openGraph: {
-      title: `Filter: ${filterName} | NoteHub`,
-      description: `View notes filtered by: ${filterName}`,
-      url: `https://github.com/Ded-Goit/08-zustand/notes/filter/${filterName}`,
+      title: slug[0] === "all" ? "All notes" : slug[0],
+      description: `This page contains notes from the category ${slug[0] === "all" ? "All notes" : slug[0]}`,
+      url: `https://github.com/Ded-Goit/08-zustand/notes/filter/${slug[0]}`,
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Notes",
         },
       ],
     },
   };
 }
-
-type NotesProps = {
-  params: Promise<{ slug?: string[] }>;
-};
 
 export default async function Notes({ params }: NotesProps) {
   const resolvedParams = await params;
