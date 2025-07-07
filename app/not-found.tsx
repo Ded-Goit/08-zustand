@@ -1,8 +1,10 @@
 // app/not-found.tsx
+import { Metadata } from "next"; // Імпортуємо тип Metadata
 import css from "./Home.module.css";
 import Link from "next/link";
 
-export const metadata = {
+export const metadata: Metadata = {
+  //  Додаємо явний тип
   title: "404 — Page Not Found | NoteHub",
   description:
     "Unfortunately, this page does not exist. Please return to the NoteHub.",
@@ -18,6 +20,7 @@ export const metadata = {
     ],
   },
 };
+
 const NotFound = () => {
   return (
     <div>

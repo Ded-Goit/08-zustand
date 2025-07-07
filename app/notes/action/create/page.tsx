@@ -1,14 +1,16 @@
 // app/notes/action/create/page.tsx
+import { Metadata } from "next"; //  Додаємо тип Metadata
 import NoteForm from "@/components/NoteForm/NoteForm";
 import css from "./CreateNote.module.css";
 
-export const metadata = {
+export const metadata: Metadata = {
+  //  Явно вказуємо тип
   title: "Create a note | NoteHub",
   description: "Create a new note and save it to NoteHub",
   openGraph: {
     title: "Create a note | NoteHub",
     description: "Create a new note and save it to NoteHub",
-    url: "https://https://08-zustand-puce.vercel.app//notes/action/create",
+    url: "https://08-zustand-puce.vercel.app/notes/action/create", //  Виправлений URL
     images: [
       {
         url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
