@@ -1,3 +1,4 @@
+//app/notes/[id]/page.tsx
 import {
   QueryClient,
   HydrationBoundary,
@@ -18,12 +19,34 @@ export async function generateMetadata({
   const parsedId = Number(id);
   const note = await fetchNoteById(parsedId);
 
+  if (!note) {
+    return {
+      title: "Note not found | NoteHub",
+      description: "The requested note does not exist.",
+      openGraph: {
+        title: "Note not found | NoteHub",
+        description: "The requested note does not exist.",
+        url: `https://08-zustand-puce.vercel.app/notes/${id}`,
+        images: [
+          {
+            url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+            width: 1200,
+            height: 630,
+            alt: "Note Details",
+          },
+        ],
+      },
+    };
+  }
+
   return {
     title: note.title,
-    description: note.content?.slice(0, 100),
+    description:
+      note.content?.slice(0, 100) || "Details about this note on NoteHub.",
     openGraph: {
       title: note.title,
-      description: note.content?.slice(0, 100),
+      description:
+        note.content?.slice(0, 100) || "Details about this note on NoteHub.",
       url: `https://08-zustand-puce.vercel.app/notes/${id}`,
       images: [
         {

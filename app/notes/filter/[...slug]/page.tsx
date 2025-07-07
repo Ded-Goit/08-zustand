@@ -1,3 +1,4 @@
+//app/notes/filter/[...slug]\page.tsx
 import { fetchNotes } from "@/lib/api";
 import {
   QueryClient,
@@ -11,18 +12,25 @@ import { Metadata } from "next";
 type NotesProps = {
   params: Promise<{ slug: string[] }>;
 };
+
 export async function generateMetadata({
   params,
 }: NotesProps): Promise<Metadata> {
   const { slug } = await params;
 
+  function capitalize(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  const tagName = slug[0] === "all" ? "All notes" : capitalize(slug[0]);
+
   return {
-    title: slug[0] === "all" ? "All notes" : slug[0],
-    description: `This page contains notes from the category ${slug[0] === "all" ? "All notes" : slug[0]}`,
+    title: tagName,
+    description: `This page contains notes from the category ${tagName}.`,
     openGraph: {
-      title: slug[0] === "all" ? "All notes" : slug[0],
-      description: `This page contains notes from the category ${slug[0] === "all" ? "All notes" : slug[0]}`,
-      url: `https://github.com/Ded-Goit/08-zustand/notes/filter/${slug[0]}`,
+      title: tagName,
+      description: `This page contains notes from the category ${tagName}.`,
+      url: `https://08-zustand-puce.vercel.app/notes/filter/${slug[0]}`,
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",

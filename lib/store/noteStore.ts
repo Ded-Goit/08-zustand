@@ -1,3 +1,4 @@
+//lib/store/noteStore.ts
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -30,7 +31,8 @@ export const useNoteStore = create<NoteStore>()(
       clearDraft: () => set({ draft: initialDraft }),
     }),
     {
-      name: "note-draft", // ключ у localStorage
+      name: "note-draft",
+      partialize: (state) => ({ draft: state.draft }), //  Зберігаємо тільки draft
     }
   )
 );
